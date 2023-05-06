@@ -76,8 +76,12 @@ document.getElementById('checkout-btn').addEventListener('click', handleCheckout
 function handleCheckout() {
   // Create a new Razorpay checkout instance
   const messageContainer = document.getElementById('message-container');
+<<<<<<< HEAD
   //messageContainer.textContent = 'Processing payment...';
   const conversionRate = 75; // Conversion rate from dollars to rupees
+=======
+  
+>>>>>>> 6c772abdd6599ed72fd48c99e07cdf120313aeb0
 
 // Calculate the cart price in rupees
 const cartPriceInRupees = cartPrice * conversionRate;

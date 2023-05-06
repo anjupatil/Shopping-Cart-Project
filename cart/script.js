@@ -76,7 +76,7 @@ document.getElementById('checkout-btn').addEventListener('click', handleCheckout
 function handleCheckout() {
   // Create a new Razorpay checkout instance
   const messageContainer = document.getElementById('message-container');
-  messageContainer.textContent = 'Processing payment...';
+  //messageContainer.textContent = 'Processing payment...';
 
 
   const options = {

@@ -626,24 +626,69 @@ rangeInput.addEventListener("input", (e) => {
 
 
 
+// let priceRangeInputs = document.querySelectorAll('input[name="prange"]');
+// priceRangeInputs.forEach((input) => {
+//   input.addEventListener("change", () => {
+//     const products = JSON.parse(localStorage.getItem("products"));
+//     const checkedInputs = Array.from(priceRangeInputs).filter((input) => input.checked);
+
+//     let filteredProducts = [];
+
+//     if (checkedInputs.length) {
+//       const prices = checkedInputs.map((input) => input.id.split("-"));
+//       filteredProducts = products.filter((product) => {
+//         const productPrice = parseFloat(product.price);
+//         for (const [minPrice, maxPrice] of prices) {
+//           if (productPrice >= parseFloat(minPrice) && productPrice <= parseFloat(maxPrice)) {
+//             return true;
+//           }
+//         }
+//         return false;
+//       });
+//     } else {
+//       filteredProducts = products;
+//     }
+
+//     if (filteredProducts.length === 0) {
+//       displayNotFoundMessage();
+//     } else {
+//       displayProducts(filteredProducts);
+//       attachAddToCartListeners();
+//     }
+
+//     // Clear other price range filters
+//     clearOtherPriceRangeFilters(input);
+//   });
+// });
+
+// function clearOtherPriceRangeFilters(currentFilter) {
+//   priceRangeInputs.forEach((filter) => {
+//     if (filter !== currentFilter) {
+//       filter.checked = false;
+//     }
+//   });
+// }
 let priceRangeInputs = document.querySelectorAll('input[name="prange"]');
+let previousCheckedInput = null;
+
 priceRangeInputs.forEach((input) => {
   input.addEventListener("change", () => {
+    if (previousCheckedInput && previousCheckedInput !== input) {
+      previousCheckedInput.checked = false;
+    }
+
     const products = JSON.parse(localStorage.getItem("products"));
-    const checkedInputs = Array.from(priceRangeInputs).filter((input) => input.checked);
+    const checkedInput = Array.from(priceRangeInputs).find((input) => input.checked);
 
     let filteredProducts = [];
 
-    if (checkedInputs.length) {
-      const prices = checkedInputs.map((input) => input.id.split("-"));
+    if (checkedInput) {
+      const priceRange = checkedInput.id.split("-");
       filteredProducts = products.filter((product) => {
         const productPrice = parseFloat(product.price);
-        for (const [minPrice, maxPrice] of prices) {
-          if (productPrice >= parseFloat(minPrice) && productPrice <= parseFloat(maxPrice)) {
-            return true;
-          }
-        }
-        return false;
+        const minPrice = parseFloat(priceRange[0]);
+        const maxPrice = parseFloat(priceRange[1]);
+        return productPrice >= minPrice && productPrice <= maxPrice;
       });
     } else {
       filteredProducts = products;
@@ -656,19 +701,9 @@ priceRangeInputs.forEach((input) => {
       attachAddToCartListeners();
     }
 
-    // Clear other price range filters
-    clearOtherPriceRangeFilters(input);
+    previousCheckedInput = input;
   });
 });
-
-function clearOtherPriceRangeFilters(currentFilter) {
-  priceRangeInputs.forEach((filter) => {
-    if (filter !== currentFilter) {
-      filter.checked = false;
-    }
-  });
-}
-
 
 
 

@@ -91,3 +91,11 @@ document.querySelector('form').addEventListener('submit', (event) => {
   messageDiv.textContent = 'Profile updated successfully!';
   document.querySelector('form').insertAdjacentElement('afterend', successMessage);
 });
+
+// Add an event listener to the logout button
+const logoutButton = document.getElementById("lgout");
+logoutButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  sessionStorage.setItem('loggedIn', 'false'); // Set the login status to false
+  window.location.href = "../logout.html"; // Redirect to the logout page
+});

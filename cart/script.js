@@ -77,11 +77,14 @@ function handleCheckout() {
   // Create a new Razorpay checkout instance
   const messageContainer = document.getElementById('message-container');
   //messageContainer.textContent = 'Processing payment...';
+  const conversionRate = 75; // Conversion rate from dollars to rupees
 
+// Calculate the cart price in rupees
+const cartPriceInRupees = cartPrice * conversionRate;
 
   const options = {
     key: 'rzp_test_PV1oQ0oMtgXOsq',
-    amount: cartPrice * 100,
+    amount: cartPriceInRupees * 100,
     currency: 'INR',
     name: 'Shopping Cart',
     description: 'Payment for items in cart',

@@ -107,6 +107,8 @@ body {
 
   .landingPagePic img{
     width: 100%;
+    min-width: 400px;
+    height: 400px;
   }
   
 
@@ -116,10 +118,12 @@ body {
 
   .item {
     border: 1px solid black;
-   width: 200px;
-   height: fit-content;
-   overflow: hidden;
-   margin: 0;
+  width: 100%;
+  max-width: 300px;
+  height: fit-content;
+  
+  overflow: hidden;
+  margin: 0;
     
    
   }
@@ -129,6 +133,7 @@ body {
   .item img {
     
     max-width: 100%;
+    height: auto;
    
   }
 
